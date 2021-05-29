@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { HI_COMMAND } = require('./commands');
+const { HI_COMMAND, RATEUP_COMMAND } = require('./commands');
 
 (async () => {
   const response = await fetch(
@@ -10,7 +10,10 @@ const { HI_COMMAND } = require('./commands');
         Authorization: `Bot ${process.env.TOKEN}`,
       },
       method: 'PUT',
-      body: JSON.stringify([HI_COMMAND]),
+      body: JSON.stringify([
+        HI_COMMAND.registerObj,
+        RATEUP_COMMAND.registerObj,
+      ]),
     }
   );
 

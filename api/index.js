@@ -4,7 +4,7 @@ const {
   verifyKey,
 } = require('discord-interactions');
 const getRawBody = require('raw-body');
-const { HI_COMMAND } = require('../commands');
+const { HI_COMMAND, RATEUP_COMMAND } = require('../commands');
 
 // Reference: https://ianmitchell.dev/blog/deploying-a-discord-bot-as-a-vercel-serverless-function
 
@@ -33,16 +33,20 @@ module.exports = async function (request, response) {
     if (message.type === InteractionType.PING) {
       response.send({ type: InteractionResponseType.PONG });
     } else if (message.type === InteractionType.APPLICATION_COMMAND) {
+      // Cache responses for 24 hours
+      response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400');
+
       const commandName = message.data.name;
 
       switch (commandName.toLowerCase()) {
-        case HI_COMMAND.name.toLowerCase(): {
-          return response.status(200).send({
-            type: 4,
-            data: {
-              content: 'Mark my words... Vengeance will be mine!',
-            },
-          });
+        case HI_COMMAND.name: {
+          return response.status(200).send(HI_COMMAND.getResponseObj(data));
+        }
+
+        case RATEUP_COMMAND.name: {
+          return response
+            .status(200)
+            .send(await RATEUP_COMMAND.getResponseObj(data));
         }
 
         default: {

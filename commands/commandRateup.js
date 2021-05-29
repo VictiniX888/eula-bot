@@ -67,18 +67,18 @@ async function getResponseObj(data) {
       bannerNames.map(async (bannerName) => await fetchBannerData(bannerName))
     );
 
-    if (bannerDatas.every((data) => data === undefined)) {
-      // All banners do not exist
+    if (bannerDatas.some((data) => data === undefined)) {
+      // Some banners do not exist
       return {
         type: 4,
         data: {
-          content: 'No banners could be found!',
+          content: 'Some banners could not be found!',
         },
       };
     }
 
     const prettyData = bannerDatas
-      .map((data) => prettifyBannerData(data))
+      .map((data, i) => prettifyBannerData(bannerNames[i], data))
       .join('\n\n');
 
     return {

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A Discord bot",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node -r dotenv/config index.js",
     "register": "node -r dotenv/config register.js",

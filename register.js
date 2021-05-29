@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
-import { HI_COMMAND } from './api/index.js';
+const fetch = require('node-fetch');
+const { HI_COMMAND } = require('./api/commands');
 
 (async () => {
   const response = await fetch(

@@ -1,18 +1,14 @@
-import {
+const {
   InteractionResponseType,
   InteractionType,
   verifyKey,
-} from 'discord-interactions';
-import getRawBody from 'raw-body';
+} = require('discord-interactions');
+const getRawBody = require('raw-body');
+const { HI_COMMAND } = require('./commands');
 
 // Reference: https://ianmitchell.dev/blog/deploying-a-discord-bot-as-a-vercel-serverless-function
 
-export const HI_COMMAND = {
-  name: 'eula',
-  description: 'Say hello!',
-};
-
-export default async function (request, response) {
+modules.exports = async function (request, response) {
   // Only respond to POST requests
   if (request.method === 'POST') {
     // Verify request
@@ -57,4 +53,4 @@ export default async function (request, response) {
       return response.status(400).send({ error: 'Unknown Type' });
     }
   }
-}
+};

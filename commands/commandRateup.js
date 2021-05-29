@@ -63,8 +63,8 @@ async function getResponseObj(data) {
   if (data.options === undefined) {
     // No specific banner requested, so return all rate-up banners
     const bannerNames = ['character', 'weapon'];
-    const bannerDatas = bannerNames.map(
-      (bannerName) => await fetchBannerData(bannerName)
+    const bannerDatas = await Promise.all(
+      bannerNames.map(async (bannerName) => await fetchBannerData(bannerName))
     );
 
     if (bannerDatas.every((data) => data === undefined)) {

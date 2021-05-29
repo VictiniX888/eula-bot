@@ -4,11 +4,11 @@ const {
   verifyKey,
 } = require('discord-interactions');
 const getRawBody = require('raw-body');
-const { HI_COMMAND } = require('./commands');
+const { HI_COMMAND } = require('../commands');
 
 // Reference: https://ianmitchell.dev/blog/deploying-a-discord-bot-as-a-vercel-serverless-function
 
-modules.exports = async function (request, response) {
+module.exports = async function (request, response) {
   // Only respond to POST requests
   if (request.method === 'POST') {
     // Verify request

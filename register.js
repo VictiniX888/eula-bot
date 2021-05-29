@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { HI_COMMAND } = require('./api/commands');
+const { HI_COMMAND } = require('./commands');
 
 (async () => {
   const response = await fetch(

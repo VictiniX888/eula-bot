@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "start": "node -r dotenv/config index.ts",
+    "register": "node -r dotenv/config register.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VictiniX888/eula-bot.git"
   },
-  "author": "",
+  "author": "VictiniX888",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/VictiniX888/eula-bot/issues"
@@ -21,7 +22,8 @@
   "dependencies": {
     "discord-interactions": "^2.0.2",
     "dotenv": "^10.0.0",
-    "raw-body": "^2.4.1"
+    "raw-body": "^2.4.1",
+    "typescript": "^4.3.2"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",

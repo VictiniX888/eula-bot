@@ -13,8 +13,8 @@ interface Command {
   description: string;
 }
 
-const HI_COMMAND: Command = {
-  name: 'Eula',
+export const HI_COMMAND: Command = {
+  name: 'eula',
   description: 'Say hello!',
 };
 

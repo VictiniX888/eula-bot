@@ -60,25 +60,55 @@ const options = [
 ];
 
 async function getResponseObj(data) {
-  const bannerName = data.options.find(({ name }) => name === 'banner').value;
-  const bannerData = await fetchBannerData(bannerName);
-  if (bannerData === undefined) {
+  if (data.options === undefined) {
+    // No specific banner requested, so return all rate-up banners
+    const bannerNames = ['character', 'weapon'];
+    const bannerDatas = bannerNames.map(
+      (bannerName) => await fetchBannerData(bannerName)
+    );
+
+    if (bannerDatas.every((data) => data === undefined)) {
+      // All banners do not exist
+      return {
+        type: 4,
+        data: {
+          content: 'No banners could be found!',
+        },
+      };
+    }
+
+    const prettyData = bannerDatas
+      .map((data) => prettifyBannerData(data))
+      .join('\n\n');
+
     return {
       type: 4,
       data: {
-        content: 'Banner does not exist!',
+        content: prettyData,
+      },
+    };
+  } else {
+    // Specific banner requested
+    const bannerName = data.options.find(({ name }) => name === 'banner').value;
+    const bannerData = await fetchBannerData(bannerName);
+    if (bannerData === undefined) {
+      return {
+        type: 4,
+        data: {
+          content: 'Banner does not exist!',
+        },
+      };
+    }
+
+    const prettyData = prettifyBannerData(bannerName, bannerData);
+
+    return {
+      type: 4,
+      data: {
+        content: prettyData,
       },
     };
   }
-
-  const prettyData = prettifyBannerData(bannerName, bannerData);
-
-  return {
-    type: 4,
-    data: {
-      content: prettyData,
-    },
-  };
 }
 
 const RATEUP_COMMAND = new Command(

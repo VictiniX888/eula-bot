@@ -1,0 +1,7 @@
+*.json
+*.md
+*.yml
+
+# Copied from gitignore
+node_modules/**/*
+.env*

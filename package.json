@@ -1,0 +1,30 @@
+{
+  "name": "eula-bot",
+  "version": "0.1.0",
+  "description": "A Discord bot",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node -r dotenv/config index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictiniX888/eula-bot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VictiniX888/eula-bot/issues"
+  },
+  "homepage": "https://github.com/VictiniX888/eula-bot#readme",
+  "dependencies": {
+    "discord-interactions": "^2.0.2",
+    "dotenv": "^10.0.0",
+    "raw-body": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "@vercel/node": "^1.11.0"
+  }
+}

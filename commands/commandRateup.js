@@ -50,7 +50,10 @@ const options = [
     type: 3,
     name: 'banner',
     description: 'The banner to specify',
-    choices: ['character', 'weapon'],
+    choices: [
+      { name: 'character', value: 'character' },
+      { name: 'weapon', value: 'weapon' },
+    ],
   },
 ];
 

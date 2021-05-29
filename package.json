@@ -2,11 +2,11 @@
   "name": "eula-bot",
   "version": "0.1.0",
   "description": "A Discord bot",
-  "main": "index.ts",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node -r dotenv/config index.ts",
-    "register": "node -r dotenv/config register.ts",
+    "start": "node -r dotenv/config index.js",
+    "register": "node -r dotenv/config register.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,11 +22,7 @@
   "dependencies": {
     "discord-interactions": "^2.0.2",
     "dotenv": "^10.0.0",
-    "raw-body": "^2.4.1",
-    "typescript": "^4.3.2"
-  },
-  "devDependencies": {
-    "@types/node": "^15.6.1",
-    "@vercel/node": "^1.11.0"
+    "node-fetch": "^2.6.1",
+    "raw-body": "^2.4.1"
   }
 }

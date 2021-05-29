@@ -4,29 +4,20 @@ import {
   verifyKey,
 } from 'discord-interactions';
 import getRawBody from 'raw-body';
-import { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Reference: https://ianmitchell.dev/blog/deploying-a-discord-bot-as-a-vercel-serverless-function
 
-interface Command {
-  name: string;
-  description: string;
-}
-
-export const HI_COMMAND: Command = {
+export const HI_COMMAND = {
   name: 'eula',
   description: 'Say hello!',
 };
 
-export default async function (
-  request: VercelRequest,
-  response: VercelResponse
-) {
+export default async function (request, response) {
   // Only respond to POST requests
   if (request.method === 'POST') {
     // Verify request
-    const signature = request.headers['x-signature-ed25519'] as string;
-    const timestamp = request.headers['x-signature-timestamp'] as string;
+    const signature = request.headers['x-signature-ed25519'];
+    const timestamp = request.headers['x-signature-timestamp'];
     const rawBody = await getRawBody(request);
 
     const isValidRequest = verifyKey(
@@ -46,7 +37,8 @@ export default async function (
     if (message.type === InteractionType.PING) {
       response.send({ type: InteractionResponseType.PONG });
     } else if (message.type === InteractionType.APPLICATION_COMMAND) {
-      const commandName: string = message.data.name;
+      const commandName = message.data.name;
+
       switch (commandName.toLowerCase()) {
         case HI_COMMAND.name.toLowerCase(): {
           return response.status(200).send({

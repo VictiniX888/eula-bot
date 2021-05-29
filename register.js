@@ -1,4 +1,5 @@
-import { HI_COMMAND } from './index';
+import fetch from 'node-fetch';
+import { HI_COMMAND } from './api/index.js';
 
 (async () => {
   const response = await fetch(

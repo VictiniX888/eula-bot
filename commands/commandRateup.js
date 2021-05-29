@@ -36,13 +36,15 @@ async function fetchBannerData(bannerName) {
   return bannerJson;
 }
 
-function prettifyBannerData(data) {
+function prettifyBannerData(bannerName, data) {
   const { r4_up_items, r5_up_items } = data;
 
-  return `5* Rate-Up: ${r5_up_items
-    .map(({ item_name }) => item_name)
-    .join(', ')}
-  4* Rate-Up: ${r4_up_items.map(({ item_name }) => item_name).join(', ')}`;
+  const r4Prettified = r4_up_items.map(({ item_name }) => item_name).join(', ');
+  const r5Prettified = r5_up_items.map(({ item_name }) => item_name).join(', ');
+
+  return `**Rate-ups for current ${bannerName} banner**
+5* Rate-Up: ${r5Prettified}
+4* Rate-Up: ${r4Prettified}`;
 }
 
 const options = [
@@ -69,7 +71,7 @@ async function getResponseObj(data) {
     };
   }
 
-  const prettyData = prettifyBannerData(bannerData);
+  const prettyData = prettifyBannerData(bannerName, bannerData);
 
   return {
     type: 4,

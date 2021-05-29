@@ -23,7 +23,7 @@ async function fetchBannerData(bannerName) {
 
   const configListUrl = `${MHY_API}/gacha/list.json`;
   const configRes = await fetch(configListUrl);
-  const configJson = await configList.json();
+  const configJson = await configRes.json();
   const configList = configJson.data.list;
 
   const bannerId = configList.find(

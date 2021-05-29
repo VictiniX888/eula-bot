@@ -40,13 +40,15 @@ module.exports = async function (request, response) {
 
       switch (commandName.toLowerCase()) {
         case HI_COMMAND.name: {
-          return response.status(200).send(HI_COMMAND.getResponseObj(data));
+          return response
+            .status(200)
+            .send(HI_COMMAND.getResponseObj(message.data));
         }
 
         case RATEUP_COMMAND.name: {
           return response
             .status(200)
-            .send(await RATEUP_COMMAND.getResponseObj(data));
+            .send(await RATEUP_COMMAND.getResponseObj(message.data));
         }
 
         default: {

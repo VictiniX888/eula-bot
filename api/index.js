@@ -45,7 +45,7 @@ module.exports = async function (request, response) {
         case GACHA_COMMAND.name: {
           return response
             .status(200)
-            .send(GACHA_COMMAND.getResponseObj(await message.data));
+            .send(await GACHA_COMMAND.getResponseObj(message.data));
         }
 
         default: {

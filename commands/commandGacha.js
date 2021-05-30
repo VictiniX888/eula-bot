@@ -74,7 +74,7 @@ function rollGacha(rolls, bannerData) {
       });
     } else if (randomRank < r3Prob + r4Prob) {
       // 4-star
-      const isFeatured = Math.random() < r4Rateup;
+      const isFeatured = Math.random() < r4UpProb;
       if (isFeatured) {
         const randomItem = Math.floor(Math.random() * r4Rateup.length);
         const item = r4Rateup[randomItem];
@@ -95,7 +95,7 @@ function rollGacha(rolls, bannerData) {
       }
     } else {
       // 5-star
-      const isFeatured = Math.random() < r5Rateup;
+      const isFeatured = Math.random() < r5UpProb;
       if (isFeatured) {
         const randomItem = Math.floor(Math.random() * r5Rateup.length);
         const item = r5Rateup[randomItem];

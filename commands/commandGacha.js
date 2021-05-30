@@ -119,10 +119,14 @@ function rollGacha(rolls, bannerData) {
 }
 
 async function getResponseObj(data) {
-  let rolls = data.options.find(({ name }) => name === 'rolls').value;
+  let rolls = data.options.find(({ name }) => name === 'rolls');
   if (rolls === undefined) {
     rolls = 10;
-  } else if (rolls < 1 || rolls > 10) {
+  } else {
+    rolls = rolls.value;
+  }
+
+  if (rolls < 1 || rolls > 10) {
     return {
       type: 4,
       data: {

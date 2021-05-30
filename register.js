@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { GACHA_COMMAND } = require('./commands');
+const { HI_COMMAND, GACHA_COMMAND } = require('./commands');
 
 (async () => {
   const response = await fetch(
@@ -10,7 +10,7 @@ const { GACHA_COMMAND } = require('./commands');
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
       },
       method: 'PUT',
-      body: JSON.stringify([GACHA_COMMAND.registerObj]),
+      body: JSON.stringify([HI_COMMAND.registerObj, GACHA_COMMAND.registerObj]),
     }
   );
 

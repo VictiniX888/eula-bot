@@ -1,43 +1,24 @@
 const fetch = require('node-fetch');
-const { HI_COMMAND } = require('./commands');
+const { GACHA_COMMAND } = require('./commands');
 
 (async () => {
-  const getResponse = await fetch(
-    `https://discord.com/api/v8/applications/${process.env.APPLICATION_ID}/commands`,
+  const response = await fetch(
+    `https://discord.com/api/v8/applications/${process.env.DISCORD_APPLICATION_ID}/commands`,
     {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.TOKEN}`,
+        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
       },
-      method: 'GET',
+      method: 'PUT',
+      body: JSON.stringify([GACHA_COMMAND.registerObj]),
     }
   );
 
-  if (!getResponse.ok) {
-    console.error('Error getting command');
-    const text = await getResponse.text();
-    console.error(text);
-    return;
-  }
-  const getData = await getResponse.json();
-  const commandId = getData.find((command) => command.name === 'rateup').id;
-
-  const deleteResponse = await fetch(
-    `https://discord.com/api/v8/applications/${process.env.APPLICATION_ID}/commands/${commandId}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.TOKEN}`,
-      },
-      method: 'DELETE',
-    }
-  );
-
-  if (deleteResponse.ok) {
-    console.log('Deleted rateup command');
+  if (response.ok) {
+    console.log('Succesfully registered commands');
   } else {
-    console.error('Error deleting commands');
-    const text = await deleteResponse.text();
+    console.error('Error registering commands');
+    const text = await response.text();
     console.error(text);
   }
 })();

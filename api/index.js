@@ -4,7 +4,7 @@ const {
   verifyKey,
 } = require('discord-interactions');
 const getRawBody = require('raw-body');
-const { HI_COMMAND } = require('../commands');
+const { HI_COMMAND, GACHA_COMMAND } = require('../commands');
 
 // Reference: https://ianmitchell.dev/blog/deploying-a-discord-bot-as-a-vercel-serverless-function
 
@@ -20,7 +20,7 @@ module.exports = async function (request, response) {
       rawBody,
       signature,
       timestamp,
-      process.env.PUBLIC_KEY
+      process.env.DISCORD_PUBLIC_KEY
     );
 
     if (!isValidRequest) {
@@ -33,9 +33,6 @@ module.exports = async function (request, response) {
     if (message.type === InteractionType.PING) {
       response.send({ type: InteractionResponseType.PONG });
     } else if (message.type === InteractionType.APPLICATION_COMMAND) {
-      // Cache responses for 24 hours
-      response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400');
-
       const commandName = message.data.name;
 
       switch (commandName.toLowerCase()) {
@@ -43,6 +40,12 @@ module.exports = async function (request, response) {
           return response
             .status(200)
             .send(HI_COMMAND.getResponseObj(message.data));
+        }
+
+        case GACHA_COMMAND.name: {
+          return response
+            .status(200)
+            .send(GACHA_COMMAND.getResponseObj(await message.data));
         }
 
         default: {
